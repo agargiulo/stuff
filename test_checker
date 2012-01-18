@@ -12,7 +12,7 @@ correctAnswer = ""
 print("Enter your responses one at a time. After the last response, enter 'end' to move on.")
 
 while True:
-	response = input(quesNum + ": ")
+	response = input(str(quesNum) + ": ")
 	if response == "end":
 		break
 	responses.append(response)
@@ -23,7 +23,7 @@ print("Enter the correct answers one at a time. After the last answer, enter 'en
 quesNum = 0 #reset the question count
 
 while True:
-	correctAnswer = input(quesNum + ": ")
+	correctAnswer = input(str(quesNum) + ": ")
 	if correctAnswer == "end":
 		break
 	correctAnswers.append(correctAnswer)
@@ -39,10 +39,10 @@ for i in range(numQuestions):
 	else:
 		wrongResponses.append(i)
 
-print("You got " + numCorrect + " out of " + numQuestions + " correct")
+print("You got " + str(numCorrect) + " out of " + str(numQuestions)+ " correct")
 showWrong = input("Would you like to see what you missed? (Y/n)")
 if showWrong == 'n':
 	exit(0)
 print("You have answered the following questions incorrectly. (Format = $questionNum: $response | $correct)")
-for wrong in range(wrongResponses):
-	print(wrong + ": " + responses[wrong] + " | " + correctAnswers[wrong])
+for wrong in wrongResponses:
+	print(str(wrong)+ ": " + str(responses[wrong]) + " | " + str(correctAnswers[wrong]))
