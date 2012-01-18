@@ -1,0 +1,7 @@
+#!/bin/zsh
+# Used to start streaming random music from my library to be used with S.O.A.P
+if [[ "$VLC" == "" ]]
+then
+	export VLC=$(which cvlc)
+fi
+${VLC} ${HOME}/Music/SOAP.m3u --random --sout-keep --sout '#transcode{acodec=vorb,ab=128,channels=1}:duplicate{dst=std{access=http,mux=ogg,dst=129.21.50.7:2345}}'

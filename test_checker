@@ -1,0 +1,41 @@
+#!/usr/bin/python3.2
+
+responses = []
+correctAnswers = []
+
+response = ""
+quesNum = 1
+correctAnswer = ""
+
+print("Enter your responses one at a time. After the last response, enter 'end' to move on.")
+
+while True:
+	response = input(quesNum + ": ")
+	if response == "end":
+		break
+	responses.append(response)
+	quesNum += 1
+
+print("Enter the correct answers one at a time. After the last answer, enter 'end' to move on.")
+
+quesNum = 0 #reset the question count
+
+while True:
+	correctAnswer = input(quesNum + ": ")
+	if correctAnswer == "end":
+		break
+	correctAnswers.append(correctAnswer)
+	quesNum += 1
+
+numQuestions = len(responses)
+numCorrect = 0
+wrongResponses = []
+
+for i in range(numQuestions):
+	if resonses[i] == correctAnswers[i]:
+		numCorrect += 1
+	else:
+		wrongResponses.append(i)
+
+print("You got " + numCorrect + " out of " + numQuestions + " correct")
+("Wou")
