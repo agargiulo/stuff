@@ -34,10 +34,15 @@ numCorrect = 0
 wrongResponses = []
 
 for i in range(numQuestions):
-	if resonses[i] == correctAnswers[i]:
+	if responses[i] == correctAnswers[i]:
 		numCorrect += 1
 	else:
 		wrongResponses.append(i)
 
 print("You got " + numCorrect + " out of " + numQuestions + " correct")
-("Wou")
+showWrong = input("Would you like to see what you missed? (Y/n)")
+if showWrong == 'n':
+	exit(0)
+print("You have answered the following questions incorrectly. (Format = $questionNum: $response | $correct)")
+for wrong in range(wrongResponses):
+	print(wrong + ": " + responses[wrong] + " | " + correctAnswers[wrong])
