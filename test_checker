@@ -18,14 +18,12 @@ while True:
 	responses.append(response)
 	quesNum += 1
 
-print("Enter the correct answers one at a time. After the last answer, enter 'end' to move on.")
+print("Enter the correct answers one at a time.")
+numQuestions = len(responses)
+quesNum = 1 #reset the question count
 
-quesNum = 0 #reset the question count
-
-while True:
+for i in range(numQuestions):
 	correctAnswer = input(str(quesNum) + ": ")
-	if correctAnswer == "end":
-		break
 	correctAnswers.append(correctAnswer)
 	quesNum += 1
 
