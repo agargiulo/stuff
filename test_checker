@@ -43,4 +43,4 @@ if showWrong == 'n':
 	exit(0)
 print("You have answered the following questions incorrectly. (Format = $questionNum: $response | $correct)")
 for wrong in wrongResponses:
-	print(str(wrong)+ ": " + str(responses[wrong]) + " | " + str(correctAnswers[wrong]))
+	print(str(wrong + 1)+ ": " + str(responses[wrong]) + " | " + str(correctAnswers[wrong]))
