@@ -1,5 +1,7 @@
 #!/usr/bin/python3.2
 
+# Author Anthony Gargiulo
+# Last modified on Wed Jan 18 02:06:33 EST 2012
 responses = []
 correctAnswers = []
 
