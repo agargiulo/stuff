@@ -2,6 +2,20 @@
 
 # Author Anthony Gargiulo
 # Last modified on Wed Jan 18 02:06:33 EST 2012
+
+def yorn(question):
+	"""
+	Convience function for yes or no questions
+	Thanks to Posiden (Ross Delinger) for this
+	"""
+	answer = input("{0} (y/N): ".format(question)).lower()
+	if answer == "y" or answer == "yes":
+		return True
+	if answer == "n" or answer == "no":
+		return False
+	else:
+		return False
+
 responses = []
 correctAnswers = []
 
@@ -38,9 +52,15 @@ for i in range(numQuestions):
 		wrongResponses.append(i)
 
 print("You got " + str(numCorrect) + " out of " + str(numQuestions)+ " correct")
-showWrong = input("Would you like to see what you missed? (Y/n)")
-if showWrong == 'n':
+
+# Review section
+if numCorrect == numQuestions: # no wrong answers, why bother asking them to review?
 	exit(0)
+
+elif not yorn("Would you like to see what you missed?"): # Do they even want to review?
+	exit(0)
+
 print("You have answered the following questions incorrectly. (Format = $questionNum: $response | $correct)")
+
 for wrong in wrongResponses:
 	print(str(wrong + 1)+ ": " + str(responses[wrong]) + " | " + str(correctAnswers[wrong]))
