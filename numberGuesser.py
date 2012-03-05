@@ -7,9 +7,9 @@ from random import randint
 numberToGuess = randint(1,100)
 
 theyGotItWrong = True
-
+print("Try to guess the number I am thinking of.")
 while(theyGotItWrong):
-   numberGuessed = int(input("Try to guess the number I am thinking of.\nTake a guess between 1 and 100: "))
+   numberGuessed = int(input("Take a guess between 1 and 100: "))
    if (numberGuessed == numberToGuess):
       print("You got it! WOOHOO!!")
       theyGotItWrong = False
