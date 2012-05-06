@@ -1,0 +1,15 @@
+#!/bin/zsh
+
+if [[ $# -lt 2 ]]
+then
+   print "Usage: ${0:t} username repo [branch]"
+   print "\nusername, repom and branch are taken from GitHub"
+   exit 1
+fi
+
+if [[ "$3" = "" ]]
+then
+   git clone git@github.com:$1/$2 -b $3
+else
+   git clone git@github.com:$1/$2
+fi
