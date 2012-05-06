@@ -9,7 +9,7 @@ fi
 
 if [[ "$3" = "" ]]
 then
-   git clone git@github.com:$1/$2 -b $3
-else
    git clone git@github.com:$1/$2
+else
+   git clone git@github.com:$1/$2 -b $3
 fi
