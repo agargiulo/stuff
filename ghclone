@@ -1,15 +1,25 @@
 #!/bin/zsh
 
-if [[ $# -lt 2 ]]
+if [[ $# -lt 1 ]]
 then
-   print "Usage: ${0:t} username repo [branch]"
+   print "Usage: ${0:t} username [repo|--] [branch]"
    print "\nusername, repom and branch are taken from GitHub"
+   print "\nif no repo is given, or if '--' is used, the username is used in its place"
+   print "\nif no branch is give, the default branch from Github is used"
    exit 1
 fi
 
-if [[ "$3" = "" ]]
+
+if [[ ("$2" = "") || ("$2" = "--") ]]
 then
-   git clone git@github.com:$1/$2
+   GIT_URL="$1/$1"
 else
-   git clone git@github.com:$1/$2 -b $3
+   GIT_URL="$1/$2"
 fi
+
+if [[ "$3" != "" ]]
+then
+   GIT_ARGS="-b $3"
+fi
+
+git clone git@github.com:$GIT_URL $GIT_ARGS
