@@ -1,0 +1,6 @@
+#!/usr/bin/bash
+if [[ $# != 1 ]]; then
+	echo "usage: ${0:t} zip-code"
+	exit 2
+fi
+curl --silent "http://xml.weather.yahoo.com/forecastrss?p=$1&u=f" | grep -E '(Current Conditions:|.\ [0-9].*\ F)' | sed -e 's/<br \/>//' -e 's/<b>//' -e 's/<\/b>//' -e 's/<BR \/>//' -e 's/<description>//' -e 's/<\/description>//'
