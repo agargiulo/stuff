@@ -1,0 +1,26 @@
+#!/usr/bin/perl
+
+# Anthony Gargiulo
+
+use strict;
+use warnings;
+use 5.10.0;
+
+my $binaryIP = $ARGV[0];
+if (not defined $binaryIP)
+{
+	say STDERR "usage: bintodec 00000000.00000000.00000000.00000000";
+	exit 1;
+}
+my @binOctets = split /\./, $binaryIP;
+my @octets = ();
+my $IP;
+foreach my $octet (@binOctets)
+{
+	my $temp = "0b" . $octet;
+	$IP .= oct($temp) . ".";
+}
+
+$IP =~ s/\.$//;
+say "$IP";
+
