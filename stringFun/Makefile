@@ -1,9 +1,15 @@
 CC = clang
 CFLAGS = -ggdb -std=c99 -Wall -Wextra
-BINARY = stringParse
+
+BINARIES = stringParse chars
+
+all: stringParse chars
 
 stringParse: stringParse.c
-	$(CC) $(CFLAGS) -o $(BINARY) $^
+	$(CC) $(CFLAGS) -o stringParse $^
 
-clean: 
-	@$(RM) -rfv $(BINARY)
+chars: chars.c
+	$(CC) $(CFLAGS) -o chars $^
+
+clean:
+	@$(RM) -rfv $(BINARIES)
