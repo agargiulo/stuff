@@ -19,12 +19,8 @@ fi
 
 if [[ "$3" != "" ]]
 then
-   GIT_ARGS="-b $3 "
+   GIT_BRANCH="-b $3"
 fi
+shift 3
 
-if [[ "$4" != "" ]]
-then
-	GIT_ARGS+=" $4"
-fi
-
-git clone git@github.com:$GIT_URL $GIT_ARGS
+git clone git@github.com:${GIT_URL} ${=GIT_BRANCH}
