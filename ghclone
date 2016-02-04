@@ -12,18 +12,21 @@ fi
 if [[ "$1" =~ "/" ]]
 then
   GIT_URL="$1"
+  shift
 elif [[ ("$2" = "") || ("$2" = "--") ]]
 then
-   GIT_URL="$1/$1"
+  GIT_URL="$1/$1"
+  shift
 else
-   GIT_URL="$1/$2"
+  GIT_URL="$1/$2"
+  shift 2
 fi
 
-if [[ "$3" != "" ]]
+if [[ "$1" != "" ]]
 then
-   GIT_BRANCH="-b $3"
+  GIT_BRANCH="-b $1"
+  shift
 fi
-shift 3
 
 pushd ~/gh_repos/
 git clone git@github.com:${GIT_URL} ${=GIT_BRANCH} ${=*}
