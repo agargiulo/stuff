@@ -9,8 +9,10 @@ then
    exit 1
 fi
 
-
-if [[ ("$2" = "") || ("$2" = "--") ]]
+if [[ "$1" =~ "/" ]]
+then
+  GIT_URL="$1"
+elif [[ ("$2" = "") || ("$2" = "--") ]]
 then
    GIT_URL="$1/$1"
 else
@@ -23,4 +25,6 @@ then
 fi
 shift 3
 
-git clone git@github.com:${GIT_URL} ${=GIT_BRANCH}
+pushd ~/gh_repos/
+git clone git@github.com:${GIT_URL} ${=GIT_BRANCH} ${=*}
+popd
