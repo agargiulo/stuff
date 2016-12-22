@@ -1,0 +1,70 @@
+#!/usr/bin/env ruby
+require 'json'
+require 'logger'
+
+log_level = ARGV.shift if ARGV.first =~ /^-(d|i)/
+
+@logger = Logger.new($stdout).tap do |log|
+  log.progname = 'IpMagic'
+  log.level = case log_level
+              when '-d', '--debug' then Logger::DEBUG
+              when '-i', '--info' then Logger::INFO
+              else Logger::WARN
+              end
+end
+
+def ip_a_to_h(ip_a)
+  {
+    ip_a[0] => {
+      ip_a[1] => {
+        ip_a[2] => [
+          ip_a[3]
+        ]
+      }
+    }
+  }
+end
+
+def add_ip_to_hash(ip)
+  ip_a = ip.split '.'
+  @logger.warn StandardError.new("invalid IP `#{ip}'") unless ip_a.length == 4
+  ip_h = ip_a_to_h ip_a
+  @ips = merge_ip_hashes @ips, ip_h
+end
+
+def merge_ip_hashes(ip_h1, ip_h2)
+  return ip_h2 if ip_h1 == {}
+  # lo == left octet, ro == right octet
+  ip_h1.merge(ip_h2) do |_k, lo2, ro2|
+    lo2.merge(ro2) do |_k, lo3, ro3|
+      lo3.merge(ro3) do |_k, lo4, ro4|
+        (lo4 + ro4).uniq
+      end
+    end
+  end
+end
+
+def pretty_print_ips
+  @ips.each_key do |oct1|
+    # require 'pry'; binding.pry
+    puts oct1 + ':'
+    @ips[oct1].each_key do |oct2|
+      puts '  ' + oct2 + ':'
+      @ips[oct1][oct2].each_key do |oct3|
+        puts '    ' + oct3 + ':'
+        puts '      ' + [oct1, oct2, oct3, @ips[oct1][oct2][oct3]].join('.')
+      end
+    end
+  end
+end
+
+def main!
+  @logger.info 'Starting up, hang on'
+  ips_to_sort = ARGF.readlines.map(&:chomp)
+  ips_to_sort.delete ''
+  @ips = {}
+  ips_to_sort.each { |ip| add_ip_to_hash ip }
+  pretty_print_ips
+end
+
+main!
